@@ -210,33 +210,33 @@ class PlatService
     {
         //research by name, return plat even if the name is written separately
 
-        $plats = $this->getAll();
-        $data = [];
-        foreach ($plats as $plat) {
-            if (str_contains($plat['name'], $name)) {
-                $data[] = $plat;
-            }
-        }
-        if (empty($data)) {
-            // set the first lettre of the plat to uppercase
-            $name = ucfirst($name);
+            $plats = $this->getAll();
+            $data = [];
             foreach ($plats as $plat) {
                 if (str_contains($plat['name'], $name)) {
                     $data[] = $plat;
                 }
             }
+            if (empty($data)) {
+                // set the first lettre of the plat to uppercase
+                $name = ucfirst($name);
+                foreach ($plats as $plat) {
+                    if (str_contains($plat['name'], $name)) {
+                        $data[] = $plat;
+                    }
+                }
 
-        } else {
-            return $data;
+            } else {
+                return $data;
 
-        }
-        if (empty($data)) {
-            return [
-                'status' => 'Plat not found',
-            ];
-        } else {
-            return $data;
-        }
+            }
+            if (empty($data)) {
+                return [
+                    'status' => 'Plat not found',
+                ];
+            } else {
+                return $data;
+            }
 
     }
 }
